@@ -1,0 +1,28 @@
+{
+    "name": "ci-scripts",
+    "version": "0.0.1",
+    "bin": {
+        "ci": "./bin/ci.js"
+    },
+    "scripts": {
+        "build:readme": "mmarkdown --src ./build/readme.md --out README.md --scripts ./build/mmd.js"
+    },
+    "dependencies": {
+        "minimist": "^1.2.0",
+        "request": "^2.85.0",
+        "request-promise": "^4.2.2"
+    },
+    "devDependencies": {
+        "glob": "^7.1.2",
+        "mmarkdown": "^1.0.0"
+    },
+    "keywords": [
+        "ci",
+        "scripts",
+        "ci-scripts",
+        "travis",
+        "circle",
+        "travisci",
+        "circleci"
+    ]
+}

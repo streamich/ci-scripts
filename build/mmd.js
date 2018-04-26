@@ -1,0 +1,1 @@
+exports.docsVars = require('./docsVars');
