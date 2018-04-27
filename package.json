@@ -5,7 +5,8 @@
         "ci": "./bin/ci.js"
     },
     "scripts": {
-        "build:readme": "mmarkdown --src ./build/readme.md --out README.md --scripts ./build/mmd.js"
+        "build:readme": "mmarkdown --src ./build/readme.md --out README.md --scripts ./build/mmd.js",
+        "eslint": "eslint --ignore-path .gitignore './**/*.js'"
     },
     "dependencies": {
         "minimist": "^1.2.0",
@@ -14,7 +15,10 @@
     },
     "devDependencies": {
         "glob": "^7.1.2",
-        "mmarkdown": "^1.0.0"
+        "mmarkdown": "^1.0.0",
+        "eslint": "^4.19.1",
+        "eslint-plugin-jsx-a11y": "^6.0.3",
+        "eslint-config-airbnb": "^16.1.0"
     },
     "keywords": [
         "ci",
