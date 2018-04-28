@@ -1,5 +1,11 @@
 # ci-scripts
 
+## Scripts
+
+```mmd
+return scripts.docsScripts();
+```
+
 
 ## Variables
 
