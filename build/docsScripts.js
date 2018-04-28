@@ -3,9 +3,7 @@ const docifyFolder = require('./docifyFolder');
 const docsScripts = () => docifyFolder({
     folder: 'lib/scripts',
     concatBlock: (name, src) => `
-### \`${name}\` Script
-
-    ci ${name}
+### \`ci ${name}\` Script
 
 ${src}
 

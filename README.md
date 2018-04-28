@@ -8,6 +8,18 @@ ci github-post
 ci s3-upload
 ```
 
+Install globally or in your project repo to get started.
+
+```shell
+npm install -g ci-scripts
+```
+
+Test that it works.
+
+```shell
+ci echo --message="It works"
+```
+
 ## CLI
 
 Command line params
@@ -25,9 +37,7 @@ Command line params
 
 
 
-### `echo` Script
-
-    ci echo
+### `ci echo` Script
 
 
 
@@ -50,9 +60,7 @@ ci echo --message "\${JSON.stringify(ci, null, 4)}" --eval
 
 
 
-### `github-post` Script
-
-    ci github-post
+### `ci github-post` Script
 
 
 
@@ -69,9 +77,7 @@ Default message:
 
 
 
-### `slack` Script
-
-    ci slack
+### `ci slack` Script
 
 Posts a message to your Slack channel.
 

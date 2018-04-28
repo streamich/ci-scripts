@@ -8,6 +8,18 @@ ci github-post
 ci s3-upload
 ```
 
+Install globally or in your project repo to get started.
+
+```shell
+npm install -g ci-scripts
+```
+
+Test that it works.
+
+```shell
+ci echo --message="It works"
+```
+
 
 ## CLI
 
