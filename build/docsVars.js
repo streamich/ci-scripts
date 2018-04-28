@@ -54,7 +54,7 @@ const docsVars = () => {
             fileText += blockText + '\n';
         }
 
-        text += `### \`${name}\` Variable\n\n` + fileText + '\n\n\n';
+        text += `#### \`${name}\` Variable\n\n` + fileText + '\n\n\n';
     }
 
     // eslint-disable-next-line consistent-return

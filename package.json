@@ -4,6 +4,10 @@
     "bin": {
         "ci": "./bin/ci.js"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/streamich/ci-scripts.git"
+      },
     "scripts": {
         "build:readme": "mmarkdown --src ./build/readme.md --out README.md --scripts ./build/mmd.js",
         "eslint": "eslint --ignore-path .gitignore './**/*.js'"
