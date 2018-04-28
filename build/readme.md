@@ -1,5 +1,13 @@
 # ci-scripts
 
+Useful scripts to execute from your CI runner.
+
+```shell
+ci slack --message="Build finished!"
+ci github-post
+ci s3-upload
+```
+
 
 ## CLI
 
