@@ -3,7 +3,7 @@ const docifyFolder = require('./docifyFolder');
 exports.scriptList = () => docifyFolder({
     folder: 'lib/scripts',
     concatBlock: () => '',
-    concatListItem: (name) => '- [`' + name + '`](#' + name.toLowerCase() + '-script)\n',
+    concatListItem: (name) => '- [`' + name + '`](#ci-' + name.toLowerCase() + '-script)\n',
 });
 
 exports.scripts = () => docifyFolder({
