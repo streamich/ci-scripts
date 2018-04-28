@@ -20,7 +20,7 @@ Test that it works.
 ci echo --message="It works"
 ```
 
-## CLI
+## Docs
 
 Command line params
 
@@ -28,12 +28,39 @@ Command line params
 - `--verbose` &mdash; log extra info.
 - `-e`, `--eval` &mdash; evaluate command line params as templat string.
 
-
-## Scripts
+Scripts
 
 - [`echo`](#echo-script)
 - [`github-post`](#github-post-script)
 - [`slack`](#slack-script)
+
+
+
+
+Variables
+
+- [`BUILD_BRANCH`](#build_branch-variable)
+- [`BUILD_NUM`](#build_num-variable)
+- [`BUILD_PR_NUM`](#build_pr_num-variable)
+- [`BUILD_PR_URL`](#build_pr_url-variable)
+- [`BUILD_URL`](#build_url-variable)
+- [`BUILD_VERSION`](#build_version-variable)
+- [`GITHUB_TOKEN`](#github_token-variable)
+- [`IS_PR`](#is_pr-variable)
+- [`IS_RELEASE`](#is_release-variable)
+- [`MONTH`](#month-variable)
+- [`PROJECT_NAME`](#project_name-variable)
+- [`PROJECT_OWNER`](#project_owner-variable)
+- [`PROJECT_VERSION`](#project_version-variable)
+- [`RELEASE_BRANCHES`](#release_branches-variable)
+- [`UPLOAD_PATH`](#upload_path-variable)
+- [`YEAR`](#year-variable)
+
+
+
+
+## Scripts
+
 
 
 
@@ -156,22 +183,6 @@ Or provide it in `ci.config.js` configuration file.
 The convetion is to use all upper case letters for "global" variables.
 
 
-- [`BUILD_BRANCH`](#build_branch-variable)
-- [`BUILD_NUM`](#build_num-variable)
-- [`BUILD_PR_NUM`](#build_pr_num-variable)
-- [`BUILD_PR_URL`](#build_pr_url-variable)
-- [`BUILD_URL`](#build_url-variable)
-- [`BUILD_VERSION`](#build_version-variable)
-- [`GITHUB_TOKEN`](#github_token-variable)
-- [`IS_PR`](#is_pr-variable)
-- [`IS_RELEASE`](#is_release-variable)
-- [`MONTH`](#month-variable)
-- [`PROJECT_NAME`](#project_name-variable)
-- [`PROJECT_OWNER`](#project_owner-variable)
-- [`PROJECT_VERSION`](#project_version-variable)
-- [`RELEASE_BRANCHES`](#release_branches-variable)
-- [`UPLOAD_PATH`](#upload_path-variable)
-- [`YEAR`](#year-variable)
 
 
 #### `BUILD_BRANCH` Variable

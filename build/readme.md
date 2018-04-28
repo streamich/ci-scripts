@@ -21,7 +21,7 @@ ci echo --message="It works"
 ```
 
 
-## CLI
+## Docs
 
 Command line params
 
@@ -29,11 +29,23 @@ Command line params
 - `--verbose` &mdash; log extra info.
 - `-e`, `--eval` &mdash; evaluate command line params as templat string.
 
+Scripts
+
+```mmd
+return scripts.scriptList();
+```
+
+Variables
+
+```mmd
+return scripts.variableList();
+```
+
 
 ## Scripts
 
 ```mmd
-return scripts.docsScripts();
+return scripts.scripts();
 ```
 
 
@@ -44,5 +56,5 @@ The convetion is to use all upper case letters for "global" variables.
 
 
 ```mmd
-return scripts.docsVars();
+return scripts.variables();
 ```
