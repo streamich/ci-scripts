@@ -153,7 +153,7 @@ Or provide it in `ci.config.js` configuration file.
 ## Variables
 
 `ci-scripts` pre-generates and normalizes across CI runners commonly used environment variables.
-The convetion is to use all upper case letters for global variables.
+The convetion is to use all upper case letters for "global" variables.
 
 
 - [`BUILD_BRANCH`](#build_branch-variable)
@@ -189,7 +189,7 @@ If `BUILD_BRANCH` environment variable is present, uses that.
 
 ```shell
 BUILD_BRANCH=test ci echo --message "branch: \${BUILD_BRANCH}"
-
+```
 
 
 If no branch is detected, defaults to empty string `___UNKNOWN_BUILD_BRANCH___`.
