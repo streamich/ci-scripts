@@ -8,5 +8,10 @@ module.exports = {
         params: {
             token: ''
         }
-    }
+    },
+    's3-upload': {
+        params: {
+            bucket: 'ci-scripts-test',
+        }
+    },
 };
