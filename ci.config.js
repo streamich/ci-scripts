@@ -14,6 +14,12 @@ module.exports = {
             bucket: 'ci-scripts-test',
             acl: 'public-read',
             deleteRemoved: true,
+        },
+        fonts: {
+            params: {
+                localDir: 'fonts/',
+                prefix: 'lol/fonts',
+            }
         }
     },
 };
