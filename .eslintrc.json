@@ -18,6 +18,8 @@
         "no-extra-parens": "off",
         "arrow-parens": "off",
         "quotes": "off",
-        "unicorn/no-array-instanceof": "off"
+        "unicorn/no-array-instanceof": "off",
+        "no-inline-comments": "off",
+        "line-comment-position": "off"
     }
 }
