@@ -30,9 +30,10 @@ Command line params
 
 Scripts
 
-- [`echo`](#echo-script)
-- [`github-post`](#github-post-script)
-- [`slack`](#slack-script)
+- [`echo`](#ci-echo-script)
+- [`github-post`](#ci-github-post-script)
+- [`github-upload`](#ci-github-upload-script)
+- [`slack`](#ci-slack-script)
 
 
 
@@ -94,12 +95,49 @@ ci echo --message "\${JSON.stringify(ci, null, 4)}" --eval
 Posts a message to your GitHub PR thread.
 
 
-Use `--text` param to specify a custom message.
+To be able to post to GitHub you need to have a GitHub access token,
+you can get one [here](https://github.com/settings/tokens).
+
+Once you have obtained your token, you can specify it as a
+`GITHUB_TOKEN` environment varialbe.
+
+```
+GITHUB_TOKEN=<your_github_token> ci github-post --plan
+```
+
+As `--token` param:
+```
+ci github-post --token=<your_github_token> --plan
+```
+
+Or in `ci.config.js`:
+
+```js
+{
+    'github-post': {
+        params: {
+            token: '<your_github_token>'
+        }
+    }
+};
+```
 
 
-Default message:
+Use `--text` param to specify a custom message. Default message:
 
 > Build version: __`x.y.z-pr-1.1`__
+
+
+
+
+### `ci github-upload` Script
+
+
+
+Uploads a specified folder to GitHub `gh-pages` branch, which
+can be used for static site or documentation hosting. By default
+it uploads the contents of `./docs` folder, but you can overwrite
+the folder using `--folder` param.
 
 
 
@@ -188,10 +226,7 @@ The convetion is to use all upper case letters for "global" variables.
 #### `BUILD_BRANCH` Variable
 
 Name of the Git branch which is currently being built.
-
 In CircleCI the `CIRCLE_BRANCH` environment variable is used.
-
-
 In TravisCI it is set to `TRAVIS_PULL_REQUEST_BRANCH` if the build originated
 as a pull request, or `TRAVIS_BRANCH` otherwise.
 
@@ -210,16 +245,11 @@ If no branch is detected, defaults to empty string `___UNKNOWN_BUILD_BRANCH___`.
 #### `BUILD_NUM` Variable
 
 Build number, a numeric value uniquely identifying current build.
-
-On CircleCI equals to `CIRCLE_BUILD_NUM` environment variable.
-
-
-On TravisCI equals to `TRAVIS_BUILD_NUMBER` environment variable.
+In CircleCI equals to `CIRCLE_BUILD_NUM` environment variable.
+In TravisCI equals to `TRAVIS_BUILD_NUMBER` environment variable.
 
 
 Otherwise tries `BUILD_NUM` environment variable.
-
-
 If not build number detected, defaults to `0`.
 
 
@@ -227,17 +257,12 @@ If not build number detected, defaults to `0`.
 #### `BUILD_PR_NUM` Variable
 
 Number of the pull request on GitHub.
-
-On CircleCI pull request number is extracted from `CI_PULL_REQUEST` environment variable.
+In CircleCI pull request number is extracted from `CI_PULL_REQUEST` environment variable.
 Which is a link to the pull request of the current job.
-
-
-On TravicCI `TRAVIS_PULL_REQUEST` environment varialbe is used.
+In TravicCI `TRAVIS_PULL_REQUEST` environment varialbe is used.
 
 
 Will also try `BUILD_PR_NUM` environment variable.
-
-
 Otherwise defaults to `0`.
 
 
@@ -303,11 +328,7 @@ detect project name:
 - TravisCI: [`TRAVIS_REPO_SLUG`](https://docs.travis-ci.com/user/environment-variables/)
 
 If environment variables are empty, it will also try to extract
-project name from `package.json`.
-
-First it will try `name` field.
-
-
+project name from `package.json`. First it will try `name` field.
 If project name is not specified in `name` field, it will
 try `repository.url` field.
 
@@ -321,8 +342,6 @@ If project name was not possible to determine, it will default to `UNKNOWN_PROJE
 
 
 User name or organization name that owns the repository.
-
-
 In TravisCI it extracts repository owner from `user/repo` slug `TRAVIS_REPO_SLUG`.
 
 
