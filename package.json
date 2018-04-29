@@ -21,7 +21,8 @@
         "request-promise": "^4.2.2",
         "chalk": "^2.4.1",
         "shell-escape": "^0.2.0",
-        "rimraf": "^2.6.2"
+        "rimraf": "^2.6.2",
+        "s3": "^4.4.0"
     },
     "devDependencies": {
         "glob": "^7.1.2",
