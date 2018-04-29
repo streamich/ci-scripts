@@ -12,6 +12,8 @@ module.exports = {
     's3-upload': {
         params: {
             bucket: 'ci-scripts-test',
+            acl: 'public-read',
+            deleteRemoved: true,
         }
     },
 };
