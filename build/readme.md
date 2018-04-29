@@ -25,7 +25,7 @@ ci echo --message="It works"
 
 Command line params
 
-- `--plan` &mdash; don't execute the actual command, but show what it would have done.
+- `--plan` &mdash; don't execute the actual command, but show what it would do.
 - `--verbose` &mdash; log extra info.
 - `-e`, `--eval` &mdash; evaluate command line params as templat string.
 
