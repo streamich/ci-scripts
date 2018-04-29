@@ -20,7 +20,8 @@
         "request": "^2.85.0",
         "request-promise": "^4.2.2",
         "chalk": "^2.4.1",
-        "shell-escape": "^0.2.0"
+        "shell-escape": "^0.2.0",
+        "rimraf": "^2.6.2"
     },
     "devDependencies": {
         "glob": "^7.1.2",
