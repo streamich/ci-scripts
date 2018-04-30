@@ -22,7 +22,8 @@
         "chalk": "^2.4.1",
         "shell-escape": "^0.2.0",
         "rimraf": "^2.6.2",
-        "s3": "^4.4.0"
+        "s3": "^4.4.0",
+        "conventional-recommended-bump": "^2.0.9"
     },
     "devDependencies": {
         "glob": "^7.1.2",
