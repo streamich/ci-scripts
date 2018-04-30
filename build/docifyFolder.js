@@ -40,12 +40,12 @@ const docifyFolder = ({folder, concatBlock, concatListItem}) => {
         for (const block of blocks) {
             const lines = block.split('\n');
 
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i];
+            for (let index = 0; index < lines.length; index++) {
+                const line = lines[index];
                 const lineMatches = line.match(REG_LINE);
 
                 if (lineMatches) {
-                    lines[i] = lineMatches[1];
+                    lines[index] = lineMatches[1];
                 }
             }
 
