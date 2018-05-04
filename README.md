@@ -1,44 +1,59 @@
 # ci-scripts
 
-Useful scripts to execute from your CI runner.
+Useful scripts to execute from your CI runner. For example, post to Slack:
 
-```shell
+```
 ci slack --message="Build finished!"
-ci github-post
+```
+
+Upload build artifacts to S3:
+
+```
 ci s3-upload
 ```
 
+Bump NPM version automatically using semantic semver and push changed `package.json` to origin:
+
+```
+ci npm-bump --type=auto
+```
+
+## Usage
+
 Install globally or in your project repo to get started.
 
-```shell
+```
 npm install -g ci-scripts
 ```
 
 Test that it works.
 
-```shell
+```
 ci echo --message="It works"
 ```
 
 ## Docs
 
-Command line params
 
-- `--plan` &mdash; don't execute the actual command, but show what it would have done.
+##### CLI Params
+
+- `--plan` &mdash; don't execute the actual command, but show what it would do.
 - `--verbose` &mdash; log extra info.
 - `-e`, `--eval` &mdash; evaluate command line params as templat string.
 
-Scripts
+
+##### Scripts
 
 - [`echo`](#ci-echo-script)
 - [`github-post`](#ci-github-post-script)
 - [`github-upload`](#ci-github-upload-script)
+- [`s3-upload`](#ci-s3-upload-script)
 - [`slack`](#ci-slack-script)
 
 
 
 
-Variables
+##### Variables
 
 - [`BUILD_BRANCH`](#build_branch-variable)
 - [`BUILD_NUM`](#build_num-variable)
@@ -81,7 +96,7 @@ Using `--eval` parameters get wrapped in template string literals and evaluated.
 You can use that to pring useful data.
 
 ```shell
-ci echo --message "Version: \${PROJECT_VERSION"}" --eval
+ci echo --message "Version: \${PROJECT_VERSION}" --eval
 ci echo --message "\${JSON.stringify(ci, null, 4)}" --eval
 ```
 
@@ -142,6 +157,25 @@ the folder using `--folder` param.
 
 
 
+### `ci s3-upload` Script
+
+
+
+Uploads a folder and all its files recursively to a destination
+in a S3 bucket.
+
+
+- `accessKeyId` &mdash; optional, AWS access key id.
+- `secretAccessKey` &mdash; optional, AWS secrekt key.
+- `src` &mdash; optional, source folder to upload, defaults to `dist/`.
+- `bucket` &mdash; required, S3 bucket name.
+- `dest` &mdash; optional, S3 destination path, defaults to '""'.
+- `acl` &mdash; optional, access rights to all uploaded objects.
+- `delete` &mdash; optional, whether to delete old files on S3, defaults to `false`.
+
+
+
+
 ### `ci slack` Script
 
 Posts a message to your Slack channel.
@@ -162,7 +196,7 @@ Set message text using `ci.config.js` config file:
 {
     slack: {
         params: {
-            text: ({PROJECT_NAME, BUILD_VERSION, BUILD_URL}) =>
+            text: ({PROJECT_NAME}) =>
                 `Success, built ${'`' + PROJECT_NAME + '`'}!`
         }
     }
@@ -238,7 +272,7 @@ BUILD_BRANCH=test ci echo --message "branch: \${BUILD_BRANCH}"
 ```
 
 
-If no branch is detected, defaults to empty string `___UNKNOWN_BUILD_BRANCH___`.
+If no branch is detected, defaults to `___UNKNOWN_BUILD_BRANCH___` string.
 
 
 
