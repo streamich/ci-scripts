@@ -1,3 +1,4 @@
 #!/usr/bin/env node
 
-require("../lib/index");
+// eslint-disable-next-line import/no-unassigned-import
+require("../lib/cli");

@@ -5,14 +5,17 @@ const glob = require('glob');
 const REG_BLOCK = /(^|\n)(\s*\/\/\/([^\n]*))+/g;
 const REG_LINE = /\s*\/\/\/\s?([^\n]*)/;
 
-const buildVarsReadme = () => {
+const docifyFolder = ({folder, concatBlock, concatListItem}) => {
     let files;
 
     try {
-        files = glob.sync('lib/vars/*.js');
+        files = glob.sync(folder + '/*.js');
     } catch (error) {
+        // eslint-disable-next-line no-console
         console.log(error);
+        // eslint-disable-next-line no-process-exit
         process.exit(1);
+
         return;
     }
 
@@ -21,25 +24,28 @@ const buildVarsReadme = () => {
     let text = '';
 
     for (const file of files) {
-        const filename = path.join(cwd, file)
+        const filename = path.join(cwd, file);
         const content = fs.readFileSync(filename, 'utf8');
         const blocks = content.match(REG_BLOCK);
         const name = path.basename(file).slice(0, -3);
         let fileText = '';
 
-        if (!blocks) continue;
+        if (!blocks) {
+            // eslint-disable-next-line no-continue
+            continue;
+        }
 
-        list += '- [`' + name + '`](#' + name.toLowerCase() + '-variable)\n';
+        list += concatListItem(name);
 
         for (const block of blocks) {
             const lines = block.split('\n');
 
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i];
+            for (let index = 0; index < lines.length; index++) {
+                const line = lines[index];
                 const lineMatches = line.match(REG_LINE);
 
                 if (lineMatches) {
-                    lines[i] = lineMatches[1];
+                    lines[index] = lineMatches[1];
                 }
             }
 
@@ -48,10 +54,11 @@ const buildVarsReadme = () => {
             fileText += blockText + '\n';
         }
 
-        text += `### \`${name}\` Variable\n\n` + fileText + '\n\n\n';
+        text += concatBlock(name, fileText);
     }
 
+    // eslint-disable-next-line consistent-return
     return list + '\n\n' + text;
 };
 
-module.exports = buildVarsReadme;
+module.exports = docifyFolder;
