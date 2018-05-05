@@ -42,7 +42,7 @@ ci echo --message="It works"
 
 - `--plan` &mdash; don't execute the actual command, but show what it would do.
 - `--verbose` &mdash; log extra info.
-- `-e`, `--eval` &mdash; evaluate command line params as templat string.
+- `-e`, `--eval` &mdash; evaluate command line params as templat strings.
 
 
 ##### Scripts
