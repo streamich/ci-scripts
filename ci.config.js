@@ -1,9 +1,4 @@
 module.exports = {
-    'github-post': {
-        params: {
-            token: ''
-        }
-    },
     's3-upload': {
         params: {
             bucket: 'ci-scripts-test',

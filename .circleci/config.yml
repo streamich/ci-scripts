@@ -37,3 +37,7 @@ jobs:
       - run:
           name: Post Slack message
           command: ./bin/ci.js slack
+
+      - run:
+          name: Post GitHub message
+          command: ./bin/ci.js github-post
