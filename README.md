@@ -18,6 +18,9 @@ Bump NPM version automatically using semantic semver and push changed `package.j
 ci npm-bump --type=auto
 ```
 
+See sample [Travis](./.travis.yml) and [CircleCI](./.circleci/config.yml) configurations.
+
+
 ## Usage
 
 Install globally or in your project repo to get started.
@@ -39,7 +42,7 @@ ci echo --message="It works"
 
 - `--plan` &mdash; don't execute the actual command, but show what it would do.
 - `--verbose` &mdash; log extra info.
-- `-e`, `--eval` &mdash; evaluate command line params as templat string.
+- `-e`, `--eval` &mdash; evaluate command line params as templat strings.
 
 
 ##### Scripts
@@ -61,12 +64,15 @@ ci echo --message="It works"
 - [`BUILD_PR_URL`](#build_pr_url-variable)
 - [`BUILD_URL`](#build_url-variable)
 - [`BUILD_VERSION`](#build_version-variable)
+- [`CI_NAME`](#ci_name-variable)
+- [`CI_PLATFORM`](#ci_platform-variable)
 - [`GITHUB_TOKEN`](#github_token-variable)
 - [`IS_PR`](#is_pr-variable)
 - [`IS_RELEASE`](#is_release-variable)
 - [`MONTH`](#month-variable)
 - [`PROJECT_NAME`](#project_name-variable)
 - [`PROJECT_OWNER`](#project_owner-variable)
+- [`PROJECT_URL`](#project_url-variable)
 - [`PROJECT_VERSION`](#project_version-variable)
 - [`RELEASE_BRANCHES`](#release_branches-variable)
 - [`UPLOAD_PATH`](#upload_path-variable)
@@ -327,6 +333,24 @@ it will contain a branch name, like `x.y.z-master.1`.
 
 
 
+#### `CI_NAME` Variable
+
+A user-friendly CI display name.
+
+- `CircleCI` for CircleCI
+- `Travis` for TravisCI
+
+
+
+#### `CI_PLATFORM` Variable
+
+A string identifying the CI platform.
+
+- `circle` for CircleCI
+- `travis` for TravisCI
+
+
+
 #### `GITHUB_TOKEN` Variable
 
 Equals to `GITHUB_TOKEN` or `GITHUB_ACCESS_TOKEN` environment variables, in that order.
@@ -381,6 +405,12 @@ In TravisCI it extracts repository owner from `user/repo` slug `TRAVIS_REPO_SLUG
 
 It will also try to extract repository owner from `package.json`,
 using `repository.url` field.
+
+
+
+#### `PROJECT_URL` Variable
+
+Link to project on GitHub.
 
 
 

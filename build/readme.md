@@ -18,6 +18,7 @@ Bump NPM version automatically using semantic semver and push changed `package.j
 ci npm-bump --type=auto
 ```
 
+See sample [Travis](./.travis.yml) and [CircleCI](./.circleci/config.yml) configurations.
 
 
 ## Usage
