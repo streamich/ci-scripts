@@ -1,6 +1,7 @@
 const slack = require('../../lib/scripts/slack');
 const log = require('../../lib/effects/log');
 const request = require('../../lib/effects/request');
+const createCi = require('../../lib/createCi');
 
 jest.mock('../../lib/effects/log');
 jest.mock('../../lib/effects/request');
@@ -18,9 +19,7 @@ describe('slack script', () => {
     });
 
     test('throws if webhook not provided', async () => {
-        const ci = {
-            params: {},
-        };
+        const ci = createCi();
 
         try {
             slack(ci, ci.params);
