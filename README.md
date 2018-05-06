@@ -1,44 +1,62 @@
 # ci-scripts
 
-Useful scripts to execute from your CI runner.
+Useful scripts to execute from your CI runner. For example, post to Slack:
 
-```shell
+```
 ci slack --message="Build finished!"
-ci github-post
+```
+
+Upload build artifacts to S3:
+
+```
 ci s3-upload
 ```
 
+Bump NPM version automatically using semantic semver and push changed `package.json` to origin:
+
+```
+ci npm-bump --type=auto
+```
+
+See sample [Travis](./.travis.yml) and [CircleCI](./.circleci/config.yml) configurations.
+
+
+## Usage
+
 Install globally or in your project repo to get started.
 
-```shell
+```
 npm install -g ci-scripts
 ```
 
 Test that it works.
 
-```shell
+```
 ci echo --message="It works"
 ```
 
 ## Docs
 
-Command line params
 
-- `--plan` &mdash; don't execute the actual command, but show what it would have done.
+##### CLI Params
+
+- `--plan` &mdash; don't execute the actual command, but show what it would do.
 - `--verbose` &mdash; log extra info.
-- `-e`, `--eval` &mdash; evaluate command line params as templat string.
+- `-e`, `--eval` &mdash; evaluate command line params as templat strings.
 
-Scripts
+
+##### Scripts
 
 - [`echo`](#ci-echo-script)
 - [`github-post`](#ci-github-post-script)
 - [`github-upload`](#ci-github-upload-script)
+- [`s3-upload`](#ci-s3-upload-script)
 - [`slack`](#ci-slack-script)
 
 
 
 
-Variables
+##### Variables
 
 - [`BUILD_BRANCH`](#build_branch-variable)
 - [`BUILD_NUM`](#build_num-variable)
@@ -46,12 +64,15 @@ Variables
 - [`BUILD_PR_URL`](#build_pr_url-variable)
 - [`BUILD_URL`](#build_url-variable)
 - [`BUILD_VERSION`](#build_version-variable)
+- [`CI_NAME`](#ci_name-variable)
+- [`CI_PLATFORM`](#ci_platform-variable)
 - [`GITHUB_TOKEN`](#github_token-variable)
 - [`IS_PR`](#is_pr-variable)
 - [`IS_RELEASE`](#is_release-variable)
 - [`MONTH`](#month-variable)
 - [`PROJECT_NAME`](#project_name-variable)
 - [`PROJECT_OWNER`](#project_owner-variable)
+- [`PROJECT_URL`](#project_url-variable)
 - [`PROJECT_VERSION`](#project_version-variable)
 - [`RELEASE_BRANCHES`](#release_branches-variable)
 - [`UPLOAD_PATH`](#upload_path-variable)
@@ -81,7 +102,7 @@ Using `--eval` parameters get wrapped in template string literals and evaluated.
 You can use that to pring useful data.
 
 ```shell
-ci echo --message "Version: \${PROJECT_VERSION"}" --eval
+ci echo --message "Version: \${PROJECT_VERSION}" --eval
 ci echo --message "\${JSON.stringify(ci, null, 4)}" --eval
 ```
 
@@ -142,6 +163,25 @@ the folder using `--folder` param.
 
 
 
+### `ci s3-upload` Script
+
+
+
+Uploads a folder and all its files recursively to a destination
+in a S3 bucket.
+
+
+- `accessKeyId` &mdash; optional, AWS access key id.
+- `secretAccessKey` &mdash; optional, AWS secrekt key.
+- `src` &mdash; optional, source folder to upload, defaults to `dist/`.
+- `bucket` &mdash; required, S3 bucket name.
+- `dest` &mdash; optional, S3 destination path, defaults to '""'.
+- `acl` &mdash; optional, access rights to all uploaded objects.
+- `delete` &mdash; optional, whether to delete old files on S3, defaults to `false`.
+
+
+
+
 ### `ci slack` Script
 
 Posts a message to your Slack channel.
@@ -162,7 +202,7 @@ Set message text using `ci.config.js` config file:
 {
     slack: {
         params: {
-            text: ({PROJECT_NAME, BUILD_VERSION, BUILD_URL}) =>
+            text: ({PROJECT_NAME}) =>
                 `Success, built ${'`' + PROJECT_NAME + '`'}!`
         }
     }
@@ -238,7 +278,7 @@ BUILD_BRANCH=test ci echo --message "branch: \${BUILD_BRANCH}"
 ```
 
 
-If no branch is detected, defaults to empty string `___UNKNOWN_BUILD_BRANCH___`.
+If no branch is detected, defaults to `___UNKNOWN_BUILD_BRANCH___` string.
 
 
 
@@ -290,6 +330,24 @@ For pull requests will equal to something like `x.y.z-pr-1.1`.
 
 For build jobs that are not part of a pull request,
 it will contain a branch name, like `x.y.z-master.1`.
+
+
+
+#### `CI_NAME` Variable
+
+A user-friendly CI display name.
+
+- `CircleCI` for CircleCI
+- `Travis` for TravisCI
+
+
+
+#### `CI_PLATFORM` Variable
+
+A string identifying the CI platform.
+
+- `circle` for CircleCI
+- `travis` for TravisCI
 
 
 
@@ -347,6 +405,12 @@ In TravisCI it extracts repository owner from `user/repo` slug `TRAVIS_REPO_SLUG
 
 It will also try to extract repository owner from `package.json`,
 using `repository.url` field.
+
+
+
+#### `PROJECT_URL` Variable
+
+Link to project on GitHub.
 
 
 
