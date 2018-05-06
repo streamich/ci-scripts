@@ -1,5 +1,5 @@
 const {execSync} = require('child_process');
-const echo = require('../../lib/scripts/echo');
+const echo = require('../../lib/cmd/echo');
 const log = require('../../lib/effects/log');
 
 jest.mock('../../lib/effects/log');
