@@ -19,7 +19,7 @@ describe('slack script', () => {
     });
 
     test('throws if webhook not provided', async () => {
-        const ci = createCi(['slack']);
+        const ci = await createCi(['slack']);
 
         try {
             slack(ci, ci.params);
@@ -30,7 +30,7 @@ describe('slack script', () => {
     });
 
     test('posts message to slack and logs to console', async () => {
-        const ci = createCi(['slack'], {webhook});
+        const ci = await createCi(['slack'], {webhook});
 
         await slack(ci, ci.params);
 
