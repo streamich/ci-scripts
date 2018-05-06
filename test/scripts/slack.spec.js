@@ -19,7 +19,7 @@ describe('slack script', () => {
     });
 
     test('throws if webhook not provided', async () => {
-        const ci = createCi();
+        const ci = createCi(['slack']);
 
         try {
             slack(ci, ci.params);
@@ -30,12 +30,15 @@ describe('slack script', () => {
     });
 
     test('posts message to slack and logs to console', async () => {
-        const ci = {
-            params: {
-                webhook
-            },
-        };
+        const ci = createCi(['slack'], {webhook});
 
         await slack(ci, ci.params);
+
+        expect(log).toHaveBeenCalledTimes(1);
+
+        const postMessage = log.mock.calls[0][2];
+
+        expect(Boolean(postMessage.match(/posted/i))).toBe(true);
+        expect(postMessage.includes(ci.BUILD_VERSION)).toBe(true);
     });
 });
