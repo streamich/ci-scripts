@@ -23,6 +23,11 @@ See sample [Travis](./.travis.yml) and [CircleCI](./.circleci/config.yml) config
 
 ## Usage
 
+You can use `ci-scripts` as a CLI tool as well as programmatically.
+
+
+### From Command Line
+
 Install globally or in your project repo to get started.
 
 ```
@@ -36,6 +41,16 @@ ci echo --message="It works"
 ```
 
 
+### From Node.js
+
+```js
+const {exec} = require('ci-scripts');
+
+exec(['echo'], {message: 'It works'});
+```
+
+
+
 ## Docs
 
 
@@ -44,6 +59,8 @@ ci echo --message="It works"
 - `--plan` &mdash; don't execute the actual command, but show what it would do.
 - `--verbose` &mdash; log extra info.
 - `-e`, `--eval` &mdash; evaluate command line params as templat strings.
+- `-v`, `--version` &mdash; prints version.
+- `-h`, `--help` &mdash; prints README in terminal.
 
 
 ##### Scripts

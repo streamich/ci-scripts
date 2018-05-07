@@ -1,6 +1,6 @@
 {
     "name": "ci-scripts",
-    "version": "0.5.1",
+    "version": "0.8.0",
     "bin": {
         "ci": "./bin/ci.js"
     },
@@ -24,7 +24,9 @@
         "shell-escape": "^0.2.0",
         "rimraf": "^2.6.2",
         "s3": "^4.4.0",
-        "conventional-recommended-bump": "^2.0.9"
+        "conventional-recommended-bump": "^2.0.9",
+        "marked": "^0.3.19",
+        "marked-terminal": "^2.0.0"
     },
     "devDependencies": {
         "glob": "7.1.2",
