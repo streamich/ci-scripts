@@ -1,6 +1,6 @@
 {
     "name": "ci-scripts",
-    "version": "0.8.1",
+    "version": "0.8.2",
     "bin": {
         "ci": "./bin/ci.js"
     },
