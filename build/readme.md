@@ -1,9 +1,10 @@
 # ci-scripts
 
-Useful scripts to execute from your CI runner. For example, post to Slack:
+Useful scripts to execute from your CI runner. For example, post to Slack and GitHub:
 
 ```
-ci slack --message="Build finished!"
+ci slack
+ci github-post
 ```
 
 Upload build artifacts to S3:
@@ -15,7 +16,7 @@ ci s3-upload
 Bump NPM version automatically using semantic semver and push changed `package.json` to origin:
 
 ```
-ci npm-bump --type=auto
+ci npm-bump
 ```
 
 See sample [Travis](./.travis.yml) and [CircleCI](./.circleci/config.yml) configurations.
@@ -54,15 +55,6 @@ exec(['echo'], {message: 'It works'});
 ## Docs
 
 
-##### CLI Params
-
-- `--plan` &mdash; don't execute the actual command, but show what it would do.
-- `--verbose` &mdash; log extra info.
-- `-e`, `--eval` &mdash; evaluate command line params as templat strings.
-- `-v`, `--version` &mdash; prints version.
-- `-h`, `--help` &mdash; prints README in terminal.
-
-
 ##### Scripts
 
 ```mmd
@@ -75,6 +67,15 @@ return scripts.scriptList();
 ```mmd
 return scripts.variableList();
 ```
+
+
+##### CLI Params
+
+- `--plan` &mdash; don't execute the actual command, but show what it would do.
+- `--verbose` &mdash; log extra info.
+- `-e`, `--eval` &mdash; evaluate command line params as template strings.
+- `-v`, `--version` &mdash; prints version.
+- `-h`, `--help` &mdash; prints README in terminal.
 
 
 ## Scripts
