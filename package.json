@@ -26,7 +26,8 @@
         "s3": "^4.4.0",
         "conventional-recommended-bump": "^2.0.9",
         "marked": "^0.3.19",
-        "marked-terminal": "^2.0.0"
+        "marked-terminal": "^2.0.0",
+        "cross-ci": "^0.3.1"
     },
     "devDependencies": {
         "glob": "7.1.2",
