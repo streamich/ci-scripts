@@ -21,6 +21,8 @@ ci npm-bump
 
 See sample [Travis](./.travis.yml) and [CircleCI](./.circleci/config.yml) configurations.
 
+Uses [`cross-ci`](https://github.com/streamich/cross-ci) to normalize CI variables.
+
 
 ## Usage
 
@@ -62,13 +64,6 @@ return scripts.scriptList();
 ```
 
 
-##### Variables
-
-```mmd
-return scripts.variableList();
-```
-
-
 ##### CLI Params
 
 - `--plan` &mdash; don't execute the actual command, but show what it would do.
@@ -82,15 +77,4 @@ return scripts.variableList();
 
 ```mmd
 return scripts.scripts();
-```
-
-
-## Variables
-
-`ci-scripts` pre-generates and normalizes across CI runners commonly used environment variables.
-The convetion is to use all upper case letters for "global" variables.
-
-
-```mmd
-return scripts.variables();
 ```
