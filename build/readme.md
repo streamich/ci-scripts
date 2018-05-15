@@ -35,6 +35,10 @@ exec(['echo'], {message: 'It works'});
 ```
 
 
+## Environment Variables
+
+`ci-scripts` uses [`cross-ci`](https://github.com/streamich/cross-ci).
+
 
 ## Docs
 
@@ -48,7 +52,7 @@ return scripts.scriptList();
 
 ##### CLI Params
 
-- `--plan` &mdash; don't execute the actual command, but show what it would do.
+- `--plan`, `--dry-run` &mdash; only show what would be done, without executing it.
 - `--verbose` &mdash; log extra info.
 - `-e`, `--eval` &mdash; evaluate command line params as template strings.
 - `-v`, `--version` &mdash; prints version.
