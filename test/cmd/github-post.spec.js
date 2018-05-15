@@ -30,6 +30,10 @@ describe('github-post script', () => {
     });
 
     test('throws if GITHUB_TOKEN not provided', async () => {
+        if (process.env.CI || process.env.TRAVIS) {
+            return;
+        }
+
         const ci = createCi(['github-post']);
 
         try {
