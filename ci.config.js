@@ -12,4 +12,21 @@ module.exports = {
             }
         }
     },
+    cmd: {
+        test: {
+            params: {
+                command: './switch.sh',
+                args: ['prod', 'web'],
+                env: ({PROJECT_NAME, BUILD_VERSION}) => ({
+                    NEW_KEY: `builds/${PROJECT_NAME}/${BUILD_VERSION}`
+                }),
+            }
+        },
+        year: {
+            params: {
+                command: 'printenv',
+                args: 'YEAR'
+            }
+        }
+    },
 };
