@@ -37,14 +37,14 @@ describe('slack script', () => {
 
         expect(log).toHaveBeenCalledTimes(1);
 
-        const postMessage = log.mock.calls[0][2];
+        const postMessage = log.mock.calls[0][1];
 
         expect(Boolean(postMessage.match(/posted/i))).toBe(true);
         expect(postMessage.includes(ci.BUILD_VERSION)).toBe(true);
 
         expect(request).toHaveBeenCalledTimes(1);
 
-        const config = request.mock.calls[0][2];
+        const config = request.mock.calls[0][1];
 
         expect(config.uri).toBe(webhook);
         expect(config.body.text.includes(ci.BUILD_VERSION)).toBe(true);
@@ -55,13 +55,13 @@ describe('slack script', () => {
 
         expect(log).toHaveBeenCalledTimes(1);
 
-        const postMessage = log.mock.calls[0][2];
+        const postMessage = log.mock.calls[0][1];
 
         expect(Boolean(postMessage.match(/posted/i))).toBe(true);
 
         expect(request).toHaveBeenCalledTimes(1);
 
-        const config = request.mock.calls[0][2];
+        const config = request.mock.calls[0][1];
 
         expect(config.uri).toBe(webhook);
     });

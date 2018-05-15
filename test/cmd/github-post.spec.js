@@ -20,21 +20,20 @@ describe('github-post script', () => {
         const ci = createCi(['github-post']);
 
         ci.IS_PR = false;
+        ci.params.onlyPR = true;
 
-        await githubPost(ci, {
-            onlyPR: true
-        });
+        await githubPost(ci);
 
         expect(request).toHaveBeenCalledTimes(0);
         expect(log).toHaveBeenCalledTimes(1);
-        expect(log.mock.calls[0][2]).toMatchSnapshot();
+        expect(log.mock.calls[0][1]).toMatchSnapshot();
     });
 
     test('throws if GITHUB_TOKEN not provided', async () => {
         const ci = createCi(['github-post']);
 
         try {
-            await githubPost(ci, {});
+            await githubPost(ci);
             throw new Error('not this');
         } catch (error) {
             if (error.message === 'not this') {
@@ -49,17 +48,16 @@ describe('github-post script', () => {
     test('posts to GitHub and logs', async () => {
         const ci = createCi(['github-post']);
 
-        await githubPost(ci, {
-            token: '123'
-        });
+        ci.params.token = '123';
+
+        await githubPost(ci);
 
         expect(request).toHaveBeenCalledTimes(1);
 
-        const config = request.mock.calls[0][2];
+        const config = request.mock.calls[0][1];
 
         expect(config).toMatchObject({
             method: 'POST',
-            uri: `https://api.github.com/repos/${ci.PROJECT_OWNER}/${ci.PROJECT_NAME}/commits/${ci.BUILD_COMMIT}/comments?access_token=123`,
             headers: {
                 'Content-type': 'application/json',
                 'User-Agent': 'ci-scripts',
@@ -69,7 +67,7 @@ describe('github-post script', () => {
         expect(config.body.body.includes(ci.BUILD_VERSION)).toBe(true);
 
         expect(log).toHaveBeenCalledTimes(1);
-        expect(Boolean(log.mock.calls[0][2].match(/posted/i))).toBe(true);
-        expect(log.mock.calls[0][2].includes(ci.BUILD_VERSION)).toBe(true);
+        expect(Boolean(log.mock.calls[0][1].match(/posted/i))).toBe(true);
+        expect(log.mock.calls[0][1].includes(ci.BUILD_VERSION)).toBe(true);
     });
 });
