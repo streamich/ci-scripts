@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`github-post script does nothing if not PR and "onlyPR" set 1`] = `"Will not post to GitHub, as build not triggered by a PR."`;

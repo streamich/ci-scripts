@@ -15,15 +15,14 @@ describe('echo script', () => {
 
     test('logs message to console', () => {
         const ci = {
-            params: {}
-        };
-        const params = {
-            message: 'foobar',
+            params: {
+                message: 'foobar',
+            }
         };
 
-        echo(ci, params);
+        echo(ci);
 
-        expect(log).toHaveBeenCalledWith(ci, params, 'foobar');
+        expect(log).toHaveBeenCalledWith(ci, 'foobar');
     });
 
     test('static message', () => {

@@ -1,6 +1,6 @@
 {
     "name": "ci-scripts",
-    "version": "0.8.0",
+    "version": "0.8.2",
     "bin": {
         "ci": "./bin/ci.js"
     },
@@ -9,7 +9,7 @@
         "url": "git+ssh://git@github.com/streamich/ci-scripts.git"
     },
     "scripts": {
-        "build": "echo 'There is no build script.' && exit 0",
+        "build": "npm run build:readme",
         "build:readme": "mmarkdown --src ./build/readme.md --out README.md --scripts ./build/mmd.js",
         "test": "jest",
         "eslint": "eslint --ignore-path .gitignore './**/*.js'",
@@ -26,7 +26,8 @@
         "s3": "^4.4.0",
         "conventional-recommended-bump": "^2.0.9",
         "marked": "^0.3.19",
-        "marked-terminal": "^2.0.0"
+        "marked-terminal": "^2.0.0",
+        "cross-ci": "^1.0.0"
     },
     "devDependencies": {
         "glob": "7.1.2",

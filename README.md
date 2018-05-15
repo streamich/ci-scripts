@@ -1,46 +1,30 @@
 # ci-scripts
 
-Useful scripts to execute from your CI runner. For example, post to Slack:
+Useful scripts to execute from your CI runner. For example,
+post to Slack and GitHub when your build completes:
 
 ```
-ci slack --message="Build finished!"
+ci slack
+ci github-post
 ```
 
-Upload build artifacts to S3:
+Uses [`cross-ci`](https://github.com/streamich/cross-ci) to normalize environment variables.
+
+
+##### Install
 
 ```
-ci s3-upload
+npm install ci-scripts
 ```
 
-Bump NPM version automatically using semantic semver and push changed `package.json` to origin:
+##### CLI usage
 
-```
-ci npm-bump --type=auto
-```
-
-See sample [Travis](./.travis.yml) and [CircleCI](./.circleci/config.yml) configurations.
-
-
-## Usage
-
-You can use `ci-scripts` as a CLI tool as well as programmatically.
-
-
-### From Command Line
-
-Install globally or in your project repo to get started.
-
-```
-npm install -g ci-scripts
-```
-
-Test that it works.
 
 ```
 ci echo --message="It works"
 ```
 
-### From Node.js
+##### Node usage
 
 ```js
 const {exec} = require('ci-scripts');
@@ -48,16 +32,12 @@ const {exec} = require('ci-scripts');
 exec(['echo'], {message: 'It works'});
 ```
 
+## Environment Variables
+
+`ci-scripts` uses [`cross-ci`](https://github.com/streamich/cross-ci).
+
+
 ## Docs
-
-
-##### CLI Params
-
-- `--plan` &mdash; don't execute the actual command, but show what it would do.
-- `--verbose` &mdash; log extra info.
-- `-e`, `--eval` &mdash; evaluate command line params as templat strings.
-- `-v`, `--version` &mdash; prints version.
-- `-h`, `--help` &mdash; prints README in terminal.
 
 
 ##### Scripts
@@ -66,6 +46,7 @@ exec(['echo'], {message: 'It works'});
 - [`github-post`](#ci-github-post-script)
 - [`github-upload`](#ci-github-upload-script)
 - [`help`](#ci-help-script)
+- [`readme`](#ci-readme-script)
 - [`s3-upload`](#ci-s3-upload-script)
 - [`slack`](#ci-slack-script)
 - [`version`](#ci-version-script)
@@ -73,29 +54,13 @@ exec(['echo'], {message: 'It works'});
 
 
 
-##### Variables
+##### CLI Params
 
-- [`BUILD_BRANCH`](#build_branch-variable)
-- [`BUILD_NUM`](#build_num-variable)
-- [`BUILD_PR_NUM`](#build_pr_num-variable)
-- [`BUILD_PR_URL`](#build_pr_url-variable)
-- [`BUILD_URL`](#build_url-variable)
-- [`BUILD_VERSION`](#build_version-variable)
-- [`CI_NAME`](#ci_name-variable)
-- [`CI_PLATFORM`](#ci_platform-variable)
-- [`GITHUB_TOKEN`](#github_token-variable)
-- [`IS_PR`](#is_pr-variable)
-- [`IS_RELEASE`](#is_release-variable)
-- [`MONTH`](#month-variable)
-- [`PROJECT_NAME`](#project_name-variable)
-- [`PROJECT_OWNER`](#project_owner-variable)
-- [`PROJECT_URL`](#project_url-variable)
-- [`PROJECT_VERSION`](#project_version-variable)
-- [`RELEASE_BRANCHES`](#release_branches-variable)
-- [`UPLOAD_PATH`](#upload_path-variable)
-- [`YEAR`](#year-variable)
-
-
+- `--plan`, `--dry-run` &mdash; only show what would be done, without executing it.
+- `--verbose` &mdash; log extra info.
+- `-e`, `--eval` &mdash; evaluate command line params as template strings.
+- `-v`, `--version` &mdash; prints version.
+- `-h`, `--help` &mdash; prints README in terminal.
 
 
 ## Scripts
@@ -113,7 +78,6 @@ message in `--message` param.
 ```shell
 ci echo --message "Hello world!"
 ```
-
 
 Using `--eval` parameters get wrapped in template string literals and evaluated.
 You can use that to pring useful data.
@@ -181,6 +145,15 @@ the folder using `--folder` param.
 
 
 ### `ci help` Script
+
+
+
+Prints README in terminal.
+
+
+
+
+### `ci readme` Script
 
 
 
@@ -285,209 +258,13 @@ Or provide it in `ci.config.js` configuration file.
 
 
 
-Prints out the version of `ci-scripts`. Use it in
-one the three ways below.
+Prints out the version of `ci-scripts`.
 
 ```
 ci version
 ci -v
 ci --version
 ```
-
-
-
-
-
-## Variables
-
-`ci-scripts` pre-generates and normalizes across CI runners commonly used environment variables.
-The convetion is to use all upper case letters for "global" variables.
-
-
-
-
-#### `BUILD_BRANCH` Variable
-
-
-
-Name of the Git branch which is currently being built.
-In CircleCI the `CIRCLE_BRANCH` environment variable is used.
-In TravisCI it is set to `TRAVIS_PULL_REQUEST_BRANCH` if the build originated
-as a pull request, or `TRAVIS_BRANCH` otherwise.
-If `BUILD_BRANCH` environment variable is present, uses that.
-
-```shell
-BUILD_BRANCH=test ci echo --message "branch: \${BUILD_BRANCH}"
-```
-
-
-
-#### `BUILD_NUM` Variable
-
-Build number, a numeric value uniquely identifying current build.
-In CircleCI equals to `CIRCLE_BUILD_NUM` environment variable.
-In TravisCI equals to `TRAVIS_BUILD_NUMBER` environment variable.
-Otherwise tries `BUILD_NUM` environment variable.
-If not build number detected, defaults to `0`.
-
-
-
-#### `BUILD_PR_NUM` Variable
-
-Number of the pull request on GitHub.
-In CircleCI pull request number is extracted from `CI_PULL_REQUEST` environment variable.
-Which is a link to the pull request of the current job.
-In TravicCI `TRAVIS_PULL_REQUEST` environment varialbe is used.
-
-
-Will also try `BUILD_PR_NUM` environment variable.
-Otherwise defaults to `0`.
-
-
-
-#### `BUILD_PR_URL` Variable
-
-URL to GitHub PR page.
-
-
-
-#### `BUILD_URL` Variable
-
-URL to CI build page.
-
-
-
-#### `BUILD_VERSION` Variable
-
-A human-readable string uniquely identifying current build.
-For pull requests will equal to something like `x.y.z-pr-1.1`.
-For build jobs that are not part of a pull request,
-it will contain a branch name, like `x.y.z-master.1`.
-
-
-
-#### `CI_NAME` Variable
-
-A user-friendly CI display name.
-
-- `CircleCI` for CircleCI
-- `Travis` for TravisCI
-
-
-
-#### `CI_PLATFORM` Variable
-
-A string identifying the CI platform.
-
-- `circle` for CircleCI
-- `travis` for TravisCI
-
-
-
-#### `GITHUB_TOKEN` Variable
-
-Equals to `GITHUB_TOKEN` or `GITHUB_ACCESS_TOKEN` environment variables, in that order.
-
-
-
-#### `IS_PR` Variable
-
-Boolean, `true` if the current build is triggered by a pull request.
-
-
-
-#### `IS_RELEASE` Variable
-
-Is `true` if currently built branch is one of `RELEASE_BRANCHES`.
-
-
-
-#### `MONTH` Variable
-
-Current month numeric value as a string of length two.
-
-
-
-#### `PROJECT_NAME` Variable
-
-
-
-GitHub project name. Below is a list of environment variables per CI used to
-detect project name:
-
-- CircleCI: [`CIRCLE_PROJECT_REPONAME`](https://circleci.com/docs/1.0/environment-variables/#build-details)
-- TravisCI: [`TRAVIS_REPO_SLUG`](https://docs.travis-ci.com/user/environment-variables/)
-
-If environment variables are empty, it will also try to extract
-project name from `package.json`. First it will try `name` field.
-If project name is not specified in `name` field, it will
-try `repository.url` field.
-
-
-
-#### `PROJECT_OWNER` Variable
-
-
-
-User name or organization name that owns the repository.
-In TravisCI it extracts repository owner from `user/repo` slug `TRAVIS_REPO_SLUG`.
-
-
-It will also try to extract repository owner from `package.json`,
-using `repository.url` field.
-
-
-
-#### `PROJECT_URL` Variable
-
-Link to project on GitHub.
-
-
-
-#### `PROJECT_VERSION` Variable
-
-Semver version of your project. Taken from `package.json`.
-
-
-
-#### `RELEASE_BRANCHES` Variable
-
-Names of branches which should trigger a release when they are built.
-Defaults to `['master', 'develop', 'next-release', 'release']`.
-
-
-
-#### `UPLOAD_PATH` Variable
-
-Relative upload path where artifacts will be stored.
-For a pull request it defaults to:
-
-```js
-`/builds/${PROJECT_NAME}/prs/${YEAR}-${MONTH}/${BUILD_VERSION}`
-```
-
-Which results into something like:
-
-```
-/builds/repo/prs/2018-04/1.2.3-pr-1.1`
-```
-For not pull request it defaults to:
-
-```js
-`/builds/${PROJECT_NAME}/${BUILD_BRANCH}`
-```
-
-Which results into something like:
-
-```
-/builds/repo/master`
-```
-
-
-
-#### `YEAR` Variable
-
-Current year as a four character long string.
 
 
 

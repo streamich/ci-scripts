@@ -1,48 +1,32 @@
 # ci-scripts
 
-Useful scripts to execute from your CI runner. For example, post to Slack and GitHub:
+Useful scripts to execute from your CI runner. For example,
+post to Slack and GitHub when your build completes:
 
 ```
 ci slack
 ci github-post
 ```
 
-Upload build artifacts to S3:
+Uses [`cross-ci`](https://github.com/streamich/cross-ci) to normalize environment variables.
+
+
+##### Install
 
 ```
-ci s3-upload
+npm install ci-scripts
 ```
 
-Bump NPM version automatically using semantic semver and push changed `package.json` to origin:
 
-```
-ci npm-bump
-```
+##### CLI usage
 
-See sample [Travis](./.travis.yml) and [CircleCI](./.circleci/config.yml) configurations.
-
-
-## Usage
-
-You can use `ci-scripts` as a CLI tool as well as programmatically.
-
-
-### From Command Line
-
-Install globally or in your project repo to get started.
-
-```
-npm install -g ci-scripts
-```
-
-Test that it works.
 
 ```
 ci echo --message="It works"
 ```
 
 
-### From Node.js
+##### Node usage
 
 ```js
 const {exec} = require('ci-scripts');
@@ -50,6 +34,10 @@ const {exec} = require('ci-scripts');
 exec(['echo'], {message: 'It works'});
 ```
 
+
+## Environment Variables
+
+`ci-scripts` uses [`cross-ci`](https://github.com/streamich/cross-ci).
 
 
 ## Docs
@@ -62,16 +50,9 @@ return scripts.scriptList();
 ```
 
 
-##### Variables
-
-```mmd
-return scripts.variableList();
-```
-
-
 ##### CLI Params
 
-- `--plan` &mdash; don't execute the actual command, but show what it would do.
+- `--plan`, `--dry-run` &mdash; only show what would be done, without executing it.
 - `--verbose` &mdash; log extra info.
 - `-e`, `--eval` &mdash; evaluate command line params as template strings.
 - `-v`, `--version` &mdash; prints version.
@@ -82,15 +63,4 @@ return scripts.variableList();
 
 ```mmd
 return scripts.scripts();
-```
-
-
-## Variables
-
-`ci-scripts` pre-generates and normalizes across CI runners commonly used environment variables.
-The convetion is to use all upper case letters for "global" variables.
-
-
-```mmd
-return scripts.variables();
 ```
