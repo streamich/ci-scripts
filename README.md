@@ -129,6 +129,9 @@ Use `--text` param to specify a custom message. Default message:
 
 > Build version: __`x.y.z-pr-1.1`__
 
+You can also add extra text arount the default text message using
+the `--beforeText` and `--afterText` params.
+
 
 
 
@@ -208,6 +211,8 @@ Set message text using `ci.config.js` config file:
     }
 }
 ```
+
+You can also specify extra text messages using `--beforeText` and `--afterText` params.
 
 
 Use `--username` param to overwrite sender's display name, defaults to `ci-scripts`.
