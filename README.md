@@ -111,7 +111,8 @@ ci cmd release --plan
 - `--command` &mdash; command to execute.
 - `--args` &mdash; array of arguments to supply to command.
 - `--env` &mdash; a map of environemnt variables to add to the command.
-- `-shell` &mdash; boolean, specifying whether to execute command in console.
+- `--shell` &mdash; boolean, specifying whether to execute command in console.
+- `--cwd` &mdash; current working directory, defaults to `process.cwd()`.
 
 
 
@@ -221,13 +222,13 @@ Uploads a folder and all its files recursively to a destination
 in a S3 bucket.
 
 
-- `accessKeyId` &mdash; optional, AWS access key id.
-- `secretAccessKey` &mdash; optional, AWS secrekt key.
-- `src` &mdash; optional, source folder to upload, defaults to `dist/`.
-- `bucket` &mdash; required, S3 bucket name.
-- `dest` &mdash; optional, S3 destination path, defaults to '""'.
-- `acl` &mdash; optional, access rights to all uploaded objects.
-- `delete` &mdash; optional, whether to delete old files on S3, defaults to `false`.
+- `--accessKeyId` &mdash; optional, AWS access key id.
+- `--secretAccessKey` &mdash; optional, AWS secrekt key.
+- `--src` &mdash; optional, source folder to upload, defaults to `dist/`.
+- `--bucket` &mdash; required, S3 bucket name.
+- `--dest` &mdash; optional, S3 destination path, defaults to '""'.
+- `--acl` &mdash; optional, access rights to all uploaded objects.
+- `--delete` &mdash; optional, whether to delete old files on S3, defaults to `false`.
 
 
 
