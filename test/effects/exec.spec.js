@@ -3,6 +3,8 @@ const exec = require('../../lib/effects/exec');
 
 jest.mock('child_process');
 
+spawnSync.mockImplementation(() => ({}));
+
 describe('exec effect', () => {
     test('exists', () => {
         expect(typeof exec).toBe('function');

@@ -2,6 +2,7 @@ const log = require('../../lib/effects/log');
 const request = require('../../lib/effects/request');
 const githubPost = require('../../lib/cmd/github-post');
 const createCi = require('../../lib/createCi');
+const executeCommand = require('../../lib/exec');
 
 jest.mock('../../lib/effects/log');
 jest.mock('../../lib/effects/request');
@@ -73,5 +74,48 @@ describe('github-post script', () => {
         expect(log).toHaveBeenCalledTimes(1);
         expect(Boolean(log.mock.calls[0][1].match(/posted/i))).toBe(true);
         expect(log.mock.calls[0][1].includes(ci.BUILD_VERSION)).toBe(true);
+    });
+
+    test('can specify text', async () => {
+        await executeCommand(['github-post'], {
+            token: '123',
+            text: 'foo'
+        });
+
+        expect(request).toHaveBeenCalledTimes(1);
+
+        const config = request.mock.calls[0][1];
+        const text = config.body.body;
+
+        expect(text).toBe('foo');
+    });
+
+    test('can specify extra text', async () => {
+        await executeCommand(['github-post'], {
+            token: '123',
+            beforeText: 'bar',
+            text: 'foo',
+            afterText: 'baz',
+        });
+
+        expect(request).toHaveBeenCalledTimes(1);
+
+        const config = request.mock.calls[0][1];
+        const text = config.body.body;
+
+        expect(text).toBe('bar\n\nfoo\n\nbaz');
+    });
+
+    test('specify extra text as function', async () => {
+        await executeCommand(['github-post'], {
+            token: '123',
+            text: 'foo',
+            afterText: ({PROJECT_NAME}) => PROJECT_NAME,
+        });
+
+        const config = request.mock.calls[0][1];
+        const text = config.body.body;
+
+        expect(text).toBe('foo\n\nci-scripts');
     });
 });

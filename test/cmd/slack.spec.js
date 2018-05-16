@@ -3,6 +3,7 @@ const log = require('../../lib/effects/log');
 const request = require('../../lib/effects/request');
 const createCi = require('../../lib/createCi');
 const exec = require('../..').exec;
+const executeCommand = require('../../lib/exec');
 
 jest.mock('../../lib/effects/log');
 jest.mock('../../lib/effects/request');
@@ -64,5 +65,37 @@ describe('slack script', () => {
         const config = request.mock.calls[0][1];
 
         expect(config.uri).toBe(webhook);
+    });
+
+    test('can set before, after, and main text', async () => {
+        await executeCommand(['slack'], {
+            webhook,
+            beforeText: 'foo',
+            text: 'bar',
+            afterText: 'baz',
+        });
+
+        expect(request).toHaveBeenCalledTimes(1);
+
+        const config = request.mock.calls[0][1];
+        const text = config.body.text;
+
+        expect(text).toBe('foo\n\nbar\n\nbaz');
+    });
+
+    test('text can be a function', async () => {
+        await executeCommand(['slack'], {
+            webhook,
+            beforeText: 'foo',
+            text: ci => ci.PROJECT_NAME,
+            afterText: 'baz',
+        });
+
+        expect(request).toHaveBeenCalledTimes(1);
+
+        const config = request.mock.calls[0][1];
+        const text = config.body.text;
+
+        expect(text).toBe('foo\n\nci-scripts\n\nbaz');
     });
 });

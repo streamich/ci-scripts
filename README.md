@@ -42,6 +42,7 @@ exec(['echo'], {message: 'It works'});
 
 ##### Scripts
 
+- [`cmd`](#ci-cmd-script)
 - [`echo`](#ci-echo-script)
 - [`github-post`](#ci-github-post-script)
 - [`github-upload`](#ci-github-upload-script)
@@ -64,6 +65,54 @@ exec(['echo'], {message: 'It works'});
 
 
 ## Scripts
+
+
+
+
+### `ci cmd` Script
+
+
+
+`cmd` command allows you to execute any arbitrary command. It allows you
+to construct command arguments and environment variables using variables
+provided by [`cross-ci`](https://github.com/streamich/cross-ci). In your
+`ci.config.js` create a new command definition, say "release":
+
+```js
+module.exports = {
+  cmd: {
+    release: {
+      params: {
+        command: 'python',
+        args: ({PROJECT_NAME}) => ['./release.py', PROJECT_NAME, 'staging'],
+        env: ({PROJECT_NAME, BUILD_VERSION}) => ({
+          DEPLOY_PATH: `builds/${PROJECT_NAME}/${BUILD_VERSION}`
+        })
+      },
+    }
+  }
+};
+```
+
+Now you can execute this command.
+
+```
+ci cmd release
+```
+
+Or only print what will this command do, without executing.
+
+```
+ci cmd release --plan
+```
+
+### Parameters
+
+- `--command` &mdash; command to execute.
+- `--args` &mdash; array of arguments to supply to command.
+- `--env` &mdash; a map of environemnt variables to add to the command.
+- `--shell` &mdash; boolean, specifying whether to execute command in console.
+- `--cwd` &mdash; current working directory, defaults to `process.cwd()`.
 
 
 
@@ -129,6 +178,9 @@ Use `--text` param to specify a custom message. Default message:
 
 > Build version: __`x.y.z-pr-1.1`__
 
+You can also add extra text arount the default text message using
+the `--beforeText` and `--afterText` params.
+
 
 
 
@@ -170,13 +222,13 @@ Uploads a folder and all its files recursively to a destination
 in a S3 bucket.
 
 
-- `accessKeyId` &mdash; optional, AWS access key id.
-- `secretAccessKey` &mdash; optional, AWS secrekt key.
-- `src` &mdash; optional, source folder to upload, defaults to `dist/`.
-- `bucket` &mdash; required, S3 bucket name.
-- `dest` &mdash; optional, S3 destination path, defaults to '""'.
-- `acl` &mdash; optional, access rights to all uploaded objects.
-- `delete` &mdash; optional, whether to delete old files on S3, defaults to `false`.
+- `--accessKeyId` &mdash; optional, AWS access key id.
+- `--secretAccessKey` &mdash; optional, AWS secrekt key.
+- `--src` &mdash; optional, source folder to upload, defaults to `dist/`.
+- `--bucket` &mdash; required, S3 bucket name.
+- `--dest` &mdash; optional, S3 destination path, defaults to '""'.
+- `--acl` &mdash; optional, access rights to all uploaded objects.
+- `--delete` &mdash; optional, whether to delete old files on S3, defaults to `false`.
 
 
 
@@ -208,6 +260,8 @@ Set message text using `ci.config.js` config file:
     }
 }
 ```
+
+You can also specify extra text messages using `--beforeText` and `--afterText` params.
 
 
 Use `--username` param to overwrite sender's display name, defaults to `ci-scripts`.
