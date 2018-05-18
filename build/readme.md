@@ -43,10 +43,10 @@ exec(['echo'], {message: 'It works'});
 ## Docs
 
 
-##### Scripts
+##### Commands
 
 ```mmd
-return scripts.scriptList();
+return scripts.commandList();
 ```
 
 
@@ -57,10 +57,3 @@ return scripts.scriptList();
 - `-e`, `--eval` &mdash; evaluate command line params as template strings.
 - `-v`, `--version` &mdash; prints version.
 - `-h`, `--help` &mdash; prints README in terminal.
-
-
-## Scripts
-
-```mmd
-return scripts.scripts();
-```

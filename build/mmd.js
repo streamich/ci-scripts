@@ -1,19 +1,16 @@
+const fs = require('fs');
+const path = require('path');
 const docifyFolder = require('./docifyFolder');
 
-exports.scriptList = () => docifyFolder({
+exports.commandList = () => docifyFolder({
     folder: 'lib/cmd',
-    concatBlock: () => '',
-    concatListItem: (name) => '- [`' + name + '`](#ci-' + name.toLowerCase() + '-script)\n',
-});
+    concatListItem: (name) => '- [`' + name + '`](./docs/' + name.toLowerCase() + '.md)\n',
+    concatBlock: (name, src) => {
+        const source = `### \`${name}\` Command\n\n${src}`;
+        const filename = path.join(__dirname, '..', 'docs', name) + '.md';
 
-exports.scripts = () => docifyFolder({
-    folder: 'lib/cmd',
-    concatBlock: (name, src) => `
-### \`ci ${name}\` Script
+        fs.writeFileSync(filename, source);
 
-${src}
-
-
-`,
-    concatListItem: () => '',
+        return '';
+    },
 });
