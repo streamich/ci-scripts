@@ -3,13 +3,6 @@
 Useful scripts to execute from your CI runner. For example,
 post to Slack and GitHub when your build completes:
 
-```
-ci slack
-ci github-post
-```
-
-Uses [`cross-ci`](https://github.com/streamich/cross-ci) to normalize environment variables.
-
 
 ##### Install
 
@@ -22,7 +15,7 @@ npm install ci-scripts
 
 
 ```
-ci echo --message="It works"
+ci slack
 ```
 
 
@@ -33,11 +26,6 @@ const {exec} = require('ci-scripts');
 
 exec(['echo'], {message: 'It works'});
 ```
-
-
-## Environment Variables
-
-`ci-scripts` uses [`cross-ci`](https://github.com/streamich/cross-ci).
 
 
 ## Docs
@@ -55,3 +43,13 @@ return scripts.commandList();
 ```mmd
 return scripts.help();
 ```
+
+
+##### Environment Variables
+
+Uses [`cross-ci`](https://github.com/streamich/cross-ci) to normalize environment variables.
+
+
+##### `ci.config.js` File
+
+Optionally, you can add a `ci.config.js` file to your project, see [config file reference](./docs/ci.config.md).

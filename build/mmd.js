@@ -16,4 +16,4 @@ exports.commandList = () => docifyFolder({
     },
 });
 
-exports.help = () => '```\nci --help\n' + execSync('./bin/ci.js --help') + '```';
+exports.help = () => '```\n' + execSync('./bin/ci.js --help') + '```';
