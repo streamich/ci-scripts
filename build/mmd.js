@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const {execSync} = require('child_process');
 const docifyFolder = require('./docifyFolder');
 
 exports.commandList = () => docifyFolder({
@@ -14,3 +15,5 @@ exports.commandList = () => docifyFolder({
         return '';
     },
 });
+
+exports.help = () => '```\nci --help\n' + execSync('./bin/ci.js --help') + '```';

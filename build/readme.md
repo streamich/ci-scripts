@@ -52,8 +52,6 @@ return scripts.commandList();
 
 ##### CLI Params
 
-- `--plan`, `--dry-run` &mdash; only show what would be done, without executing it.
-- `--verbose` &mdash; log extra info.
-- `-e`, `--eval` &mdash; evaluate command line params as template strings.
-- `-v`, `--version` &mdash; prints version.
-- `-h`, `--help` &mdash; prints README in terminal.
+```mmd
+return scripts.help();
+```
