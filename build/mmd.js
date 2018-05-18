@@ -1,19 +1,19 @@
+const fs = require('fs');
+const path = require('path');
+const {execSync} = require('child_process');
 const docifyFolder = require('./docifyFolder');
 
-exports.scriptList = () => docifyFolder({
+exports.commandList = () => docifyFolder({
     folder: 'lib/cmd',
-    concatBlock: () => '',
-    concatListItem: (name) => '- [`' + name + '`](#ci-' + name.toLowerCase() + '-script)\n',
+    concatListItem: (name) => '- [`' + name + '`](./docs/' + name.toLowerCase() + '.md)\n',
+    concatBlock: (name, src) => {
+        const source = `### \`${name}\` Command\n\n${src}`;
+        const filename = path.join(__dirname, '..', 'docs', name) + '.md';
+
+        fs.writeFileSync(filename, source);
+
+        return '';
+    },
 });
 
-exports.scripts = () => docifyFolder({
-    folder: 'lib/cmd',
-    concatBlock: (name, src) => `
-### \`ci ${name}\` Script
-
-${src}
-
-
-`,
-    concatListItem: () => '',
-});
+exports.help = () => '```\n' + execSync('./bin/ci.js --help') + '```';
