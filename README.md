@@ -61,11 +61,6 @@ ci-scripts v0.10.0
   -V, --verbose         Verbose output
 ```
 
-##### Environment Variables
-
-Uses [`cross-ci`](https://github.com/streamich/cross-ci) to normalize environment variables.
-
-
 ##### `ci.config.js` File
 
 Optionally, you can add a `ci.config.js` file to your project, see [config file reference](./docs/ci.config.md).
