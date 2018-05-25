@@ -18,6 +18,7 @@ matrix:
 after_success:
   - ./bin/ci.js slack
   - ./bin/ci.js github-post
+  - npx cross-ci printenv
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
