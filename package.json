@@ -35,7 +35,7 @@
         "eslint": "5.1.0",
         "eslint-config-mailonline": "9.0.0",
         "mol-conventional-changelog": "1.4.0",
-        "jest": "23.3.0",
+        "jest": "23.4.0",
         "jest-tap-reporter": "1.9.0",
         "husky": "0.14.3"
     },
