@@ -37,5 +37,8 @@ Use `--text` param to specify a custom message. Default message:
 
 > Build version: __`x.y.z-pr-1.1`__
 
+Use `--command` param to specify a command to capture and post stdout
+of. `--command` overrides `--text` if both are specified.
+
 You can also add extra text arount the default text message using
 the `--beforeText` and `--afterText` params.
