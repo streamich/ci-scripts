@@ -90,6 +90,20 @@ describe('github-post script', () => {
         expect(text).toBe('foo');
     });
 
+    test('can specify command', async () => {
+        await executeCommand(['github-post'], {
+            token: '123',
+            command: 'echo testing command'
+        });
+
+        expect(request).toHaveBeenCalledTimes(1);
+
+        const config = request.mock.calls[0][1];
+        const text = config.body.body;
+
+        expect(text).toBe('testing command\n');
+    });
+
     test('can specify extra text', async () => {
         await executeCommand(['github-post'], {
             token: '123',
