@@ -32,7 +32,7 @@
     "devDependencies": {
         "glob": "7.1.6",
         "mmarkdown": "1.0.0",
-        "eslint": "5.16.0",
+        "eslint": "6.8.0",
         "eslint-config-mailonline": "9.0.1",
         "mol-conventional-changelog": "1.4.0",
         "jest": "23.5.0",
