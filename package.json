@@ -1,61 +1,65 @@
 {
-    "name": "ci-scripts",
-    "version": "0.11.0",
-    "bin": {
-        "ci": "./bin/ci.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+ssh://git@github.com/streamich/ci-scripts.git"
-    },
-    "scripts": {
-        "build": "npm run build:readme",
-        "build:readme": "mmarkdown --src ./build/readme.md --out README.md --scripts ./build/mmd.js",
-        "test": "jest",
-        "eslint": "eslint --ignore-path .gitignore './**/*.js'",
-        "precommit": "npm run eslint",
-        "prepush": "npm t"
-    },
-    "dependencies": {
-        "minimist": "^1.2.0",
-        "request": "^2.85.0",
-        "request-promise": "^4.2.2",
-        "chalk": "^2.4.1",
-        "shell-escape": "^0.2.0",
-        "rimraf": "^2.6.2",
-        "s3": "^4.4.0",
-        "conventional-recommended-bump": "^2.0.9",
-        "marked": "^0.8.0",
-        "marked-terminal": "^2.0.0",
-        "cross-ci": "^1.0.0"
-    },
-    "devDependencies": {
-        "glob": "7.1.6",
-        "mmarkdown": "1.0.0",
-        "eslint": "5.16.0",
-        "eslint-config-mailonline": "9.0.1",
-        "mol-conventional-changelog": "1.4.0",
-        "jest": "23.5.0",
-        "jest-tap-reporter": "1.9.0",
-        "husky": "0.14.3"
-    },
-    "config": {
-        "commitizen": {
-            "path": "./node_modules/mol-conventional-changelog"
-        }
-    },
-    "keywords": [
-        "ci",
-        "scripts",
-        "ci-scripts",
-        "travis",
-        "circle",
-        "travisci",
-        "circleci"
-    ],
-    "jest": {
-        "reporters": [
-            "jest-tap-reporter"
-        ]
+  "name": "ci-scripts",
+  "version": "0.11.0",
+  "bin": {
+    "ci": "./bin/ci.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/streamich/ci-scripts.git"
+  },
+  "scripts": {
+    "build": "npm run build:readme",
+    "build:readme": "mmarkdown --src ./build/readme.md --out README.md --scripts ./build/mmd.js",
+    "test": "jest",
+    "eslint": "eslint --ignore-path .gitignore './**/*.js'",
+    "precommit": "npm run eslint",
+    "prepush": "npm t",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2",
+    "chalk": "^2.4.1",
+    "shell-escape": "^0.2.0",
+    "rimraf": "^2.6.2",
+    "s3": "^4.4.0",
+    "conventional-recommended-bump": "^2.0.9",
+    "marked": "^0.8.0",
+    "marked-terminal": "^2.0.0",
+    "cross-ci": "^1.0.0",
+    "snyk": "^1.316.1"
+  },
+  "devDependencies": {
+    "glob": "7.1.6",
+    "mmarkdown": "1.0.0",
+    "eslint": "5.16.0",
+    "eslint-config-mailonline": "9.0.1",
+    "mol-conventional-changelog": "1.4.0",
+    "jest": "23.5.0",
+    "jest-tap-reporter": "1.9.0",
+    "husky": "0.14.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/mol-conventional-changelog"
     }
+  },
+  "keywords": [
+    "ci",
+    "scripts",
+    "ci-scripts",
+    "travis",
+    "circle",
+    "travisci",
+    "circleci"
+  ],
+  "jest": {
+    "reporters": [
+      "jest-tap-reporter"
+    ]
+  },
+  "snyk": true
 }
