@@ -30,7 +30,7 @@
         "cross-ci": "^1.0.0"
     },
     "devDependencies": {
-        "glob": "7.1.7",
+        "glob": "8.0.3",
         "mmarkdown": "1.0.0",
         "eslint": "5.16.0",
         "eslint-config-mailonline": "9.0.1",
