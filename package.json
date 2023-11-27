@@ -24,9 +24,9 @@
         "shell-escape": "^0.2.0",
         "rimraf": "^2.6.2",
         "s3": "^4.4.0",
-        "conventional-recommended-bump": "^2.0.9",
+        "conventional-recommended-bump": "^3.0.0",
         "marked": "^0.8.0",
-        "marked-terminal": "^2.0.0",
+        "marked-terminal": "^3.1.0",
         "cross-ci": "^1.0.0"
     },
     "devDependencies": {
